@@ -26,7 +26,9 @@ namespace NAppointments
 
             foreach (var currentAppointment in this._Appointments)
             {
-                var currentConflicts = previousAppointments.Where(x => x.HasConflict(currentAppointment)).Select(x => new Tuple<Appointment,Appointment>(currentAppointment, x));
+                var currentConflicts = previousAppointments
+                                        .Where(x => x.HasConflict(currentAppointment))
+                                        .Select(x => new Tuple<Appointment,Appointment>(currentAppointment, x));
                 if(currentConflicts.Count() > 0)
                     conflicts.AddRange(currentConflicts);
 
