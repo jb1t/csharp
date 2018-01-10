@@ -14,7 +14,7 @@ namespace NAppointementTests
             Assert.ThrowsException<ArgumentException>(() => new Appointment(3, 1));
         }
         [TestMethod]
-        public void IsConflicted_WhenAppointmentOutOfRange_NoConflict()
+        public void HasConflict_WhenAppointmentOutOfRange_NoConflict()
         {
             //set
             var app1 = new Appointment(1, 3);
@@ -28,7 +28,7 @@ namespace NAppointementTests
         }
 
         [TestMethod]
-        public void IsConflicted_WhenAppointmentOverlaps_Conflict()
+        public void HasConflict_WhenAppointmentOverlaps_Conflict()
         {
             //set
             var app1 = new Appointment(1, 3);
@@ -42,7 +42,7 @@ namespace NAppointementTests
         }
 
         [TestMethod]
-        public void IsConflicted_WhenAppointmentHasSameUpperBound_NoConflict()
+        public void HasConflict_WhenAppointmentHasSameUpperBound_NoConflict()
         {
             //set
             var app1 = new Appointment(1, 3);
@@ -56,9 +56,9 @@ namespace NAppointementTests
         }
 
         [TestMethod]
-        public void IsConflicted_WhenAppointmentHasSameLowerBound_NoConflict()
+        public void HasConflict_WhenAppointmentHasSameLowerBound_NoConflict()
         {
-            //set
+            //setup
             var app1 = new Appointment(3, 5);
             var app2 = new Appointment(1, 3);
 
@@ -67,6 +67,34 @@ namespace NAppointementTests
 
             //Assert
             Assert.IsFalse(hasConflict);
+        }
+
+        [TestMethod]
+        public void HasConflict_WhenAEncompassesB_HasConflictIsTrue()
+        {
+            //setup
+            var app1 = new Appointment(1, 100);
+            var app2 = new Appointment(3, 7);
+
+            //act
+            var hasConflict = app1.HasConflict(app2);
+
+            //assert
+            Assert.IsTrue(hasConflict);
+        }
+
+        [TestMethod]
+        public void HasConflict_WhenBEncompassesA_ReturnConflict()
+        {
+            //setup
+            var app1 = new Appointment(3, 7);
+            var app2 = new Appointment(1, 100);
+
+            //act
+            var hasConflict = app1.HasConflict(app2);
+
+            //assert
+            Assert.IsTrue(hasConflict);
         }
     }
 }

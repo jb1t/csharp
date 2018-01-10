@@ -66,39 +66,6 @@ namespace NAppointementTests
             Assert.AreEqual(2, result.Count);
         }
 
-        [TestMethod]
-        public void FindConflicts_WhenAEncompassesB_ReturnConflict()
-        {
-            //setup - example inputs from https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/
-            var appointments = new List<Appointment>() {
-                new Appointment(1, 100),
-                new Appointment(3, 7),
-            };
-            var apptMgr = new AppointmentManager(appointments);
-
-            //act
-            var result = apptMgr.FindConflicts();
-
-            //assert
-            Assert.AreEqual(1, result.Count);
-        }
-
-        [TestMethod]
-        public void FindConflicts_WhenBEncompassesA_ReturnConflict()
-        {
-            //setup - example inputs from https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/
-            var appointments = new List<Appointment>() {
-                new Appointment(3, 7),
-                new Appointment(1, 100),
-            };
-            var apptMgr = new AppointmentManager(appointments);
-
-            //act
-            var result = apptMgr.FindConflicts();
-
-            //assert
-            Assert.AreEqual(1, result.Count);
-        }
 
         [TestMethod]
         public void FindConflicts_ForExample_Return10Conflicts()
@@ -120,6 +87,8 @@ namespace NAppointementTests
             //assert
             Assert.AreEqual(10, result.Count);
         }
+
+
 
     }
 }
