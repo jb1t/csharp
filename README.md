@@ -4,7 +4,7 @@ Most of my career has been built using Microsoft technologies. I've developed in
 
 ## [NAppointments App](https://github.com/jb1t/csharp/tree/master/NAppointementsApp)
 
-I preparing for some interviews and I was told by a HR Recruiter that in the next phase of my interviewing would be a phone/computer session where they'd ask me a question similar to something like this: [https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/](https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/).
+I'm preparing for some interviews and I was told by a HR Recruiter that in the next phase of my interviewing would be a phone/computer session where they'd ask me a question similar to something like this: [https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/](https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/).
 
 So I thought today to practice I would take that [example and implement it](https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/).
 
