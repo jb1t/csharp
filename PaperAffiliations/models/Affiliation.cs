@@ -1,15 +1,14 @@
 using System;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace PaperAffiliations
 {
     public class Affiliation : IPopulateRecord<Affiliation>
     {
-        public Affiliation()
-        {}
-
         public string Id { get; set; }
         public string Name { get; set; }
+        public Affiliation(){}
 
         public Affiliation PopulateRecord(string line)
         {
@@ -24,6 +23,12 @@ namespace PaperAffiliations
         public override string ToString()
         {
             return $"Id: {this.Id}, Name: {this.Name}";
+        }
+
+        public string GetUrl(IConfiguration config)
+        {
+            var urls = config.GetSection("Urls");
+            return urls["Affiliation"];
         }
     }
 }

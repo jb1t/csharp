@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net;
 using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace PaperAffiliations
 {
     public class PaperRepository<T> where T : IPopulateRecord<T>, new()
     {
-        public PaperRepository()
-        {}
+        private IConfiguration _Configuration;
+        public PaperRepository(IConfiguration config) => this._Configuration = config;
 
-        public List<T> GetRecords(string url) 
+        public List<T> GetRecords() 
         {
-            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+            var newType = new T(); //hackish... creating an instance to call get GetUrl - need to refactor
+            HttpWebRequest request = WebRequest.Create(newType.GetUrl(this._Configuration)) as HttpWebRequest;
 			request.UserAgent = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MS-RTC LM 8; .NET4.0C; .NET4.0E; InfoPath.3) chromeframe/6.0.472.63";
             var content = ReadContent(request);
             var lines = content.Split("\n");

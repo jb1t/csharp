@@ -1,13 +1,15 @@
+using Microsoft.Extensions.Configuration;
+
+
 namespace PaperAffiliations
 {
     public class PAAssociation : IPopulateRecord<PAAssociation>
     {
-        public PAAssociation()
-        {}
-
         public string PaperId { get; set; }
         public string AffiliationId { get; set; }
         public string AuthorId { get; set; }
+           
+        public PAAssociation() {}
 
         public PAAssociation PopulateRecord(string line)
         {
@@ -23,6 +25,11 @@ namespace PaperAffiliations
         public override string ToString()
         {
             return $"PaperId: {this.PaperId}, AffiliationId: {this.AffiliationId}, AuthorId: {this.AuthorId}";
+        }
+        public string GetUrl(IConfiguration config)
+        {   
+            var urls = config.GetSection("Urls");
+            return urls["PAAssociation"];
         }
     }
 }

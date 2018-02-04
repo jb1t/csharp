@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace PaperAffiliations
 {
@@ -9,19 +10,23 @@ namespace PaperAffiliations
     {
         static void Main(string[] args)
         {
+
+            // Adding JSON file into IConfiguration.
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", true, true)
+                .Build();
+          
             Console.WriteLine("Hello World!");
-            var AffiliationProvider = new PaperRepository<Affiliation>();
-            var PaperProvider = new PaperRepository<Paper>();
-            var PAAssocProvider = new PaperRepository<PAAssociation>();
+            var AffiliationProvider = new PaperRepository<Affiliation>(config);
+            var PaperProvider = new PaperRepository<Paper>(config);
+            var PAAssocProvider = new PaperRepository<PAAssociation>(config);
             
-            var affiliations = AffiliationProvider.GetRecords("https://s3.amazonaws.com/kddcup2016-ghen/Affiliations.tsv");
-            var papers = PaperProvider.GetRecords("https://s3.amazonaws.com/kddcup2016-ghen/Papers.tsv");
-            var associations = PAAssocProvider.GetRecords("https://s3.amazonaws.com/kddcup2016-ghen/PapersAuthorsAffiliations.tsv");
-
-
+            var affiliations = AffiliationProvider.GetRecords(); //"https://s3.amazonaws.com/kddcup2016-ghen/Affiliations.tsv");
+            var papers = PaperProvider.GetRecords(); //"https://s3.amazonaws.com/kddcup2016-ghen/Papers.tsv");
+            var associations = PAAssocProvider.GetRecords(); //"https://s3.amazonaws.com/kddcup2016-ghen/PapersAuthorsAffiliations.tsv");
 
             // Get Results for Problem #1
-            var results = GetRankedAffiliationsByPapers(papers, affiliations, associations).OrderBy(c => c.ConferenceId).ThenBy(c => c.Year).ThenByDescending(c => c.CountOfPapers);;
+            var results = GetRankedAffiliationsByPapers(papers, affiliations, associations).OrderBy(c => c.ConferenceId).ThenBy(c => c.Year).ThenByDescending(c => c.CountOfPapers).ToList();
             
             Console.WriteLine("Conference\tYear\tAffiliation\tCountOfPapers");
             foreach(var result in results)
@@ -29,12 +34,10 @@ namespace PaperAffiliations
                 Console.WriteLine($"{result.ConferenceId}\t{result.Year}\t{result.AffiliationId}\t{result.CountOfPapers}");
             }
 
+            // Get Results for Problem #2
+            var results2 = GetRankedAffiliationsByAuthors(papers, affiliations, associations).OrderBy(c => c.ConferenceId).ThenBy(c => c.Year).ThenByDescending(c => c.CountOfAuthors).ToList();
 
-
-            // Get Results for Problem #1
-            var results2 = GetRankedAffiliationsByAuthors(papers, affiliations, associations).OrderBy(c => c.ConferenceId).ThenBy(c => c.Year).ThenByDescending(c => c.CountOfAuthors);
-            
-            Console.WriteLine("Conference\tYear\tAffiliation\tCountOfAuthors");
+            Console.WriteLine("Conference\tYear\tAffiliation\tCountOfAuthors"); 
             foreach(var result in results2)
             {
                 Console.WriteLine($"{result.ConferenceId}\t{result.Year}\t{result.AffiliationId}\t{result.CountOfAuthors}");
