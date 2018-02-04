@@ -14,8 +14,8 @@ namespace PaperAffiliations
             var fields = line.Split("\t");
 
             this.PaperId = fields[0];
-            this.AffiliationId = fields[1];
-            this.AuthorId = fields[2];
+            this.AuthorId = fields[1];
+            this.AffiliationId = fields[2];
             
             return this;
         }
