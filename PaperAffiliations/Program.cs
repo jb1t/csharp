@@ -21,9 +21,9 @@ namespace PaperAffiliations
             var PaperProvider = new PaperRepository<Paper>(config);
             var PAAssocProvider = new PaperRepository<PAAssociation>(config);
             
-            var affiliations = AffiliationProvider.GetRecords(AffiliationProvider.GetUrl()); 
-            var papers = PaperProvider.GetRecords(PaperProvider.GetUrl());
-            var associations = PAAssocProvider.GetRecords(PAAssocProvider.GetUrl());
+            var affiliations = AffiliationProvider.GetRecords();
+            var papers = PaperProvider.GetRecords();
+            var associations = PAAssocProvider.GetRecords();
 
             // Get Results for Problem #1
             var results = GetRankedAffiliationsByPapers(papers, affiliations, associations).OrderBy(c => c.ConferenceId).ThenBy(c => c.Year).ThenByDescending(c => c.CountOfPapers).ToList();
