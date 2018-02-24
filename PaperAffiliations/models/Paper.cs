@@ -11,6 +11,7 @@ namespace PaperAffiliations
         public int PublishYear { get; set; }
         public string ConferenceId { get; set; }
         public string ConferenceAbrv { get; set; }
+
         public Paper(){}
 
         public Paper PopulateRecord(string line)
@@ -29,12 +30,6 @@ namespace PaperAffiliations
         public override string ToString()
         {
             return $"Id: {this.Id}, Title: {this.Title}, PublishYear: {this.PublishYear}, ConferenceId: {this.ConferenceId}, ConferenceAbrv: {this.ConferenceAbrv}";
-        }
-
-        public string GetUrl(IConfiguration config)
-        {
-            var urls = config.GetSection("Urls");
-            return urls["Paper"];
         }
     }
 }

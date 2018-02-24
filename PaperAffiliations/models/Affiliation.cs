@@ -24,11 +24,5 @@ namespace PaperAffiliations
         {
             return $"Id: {this.Id}, Name: {this.Name}";
         }
-
-        public string GetUrl(IConfiguration config)
-        {
-            var urls = config.GetSection("Urls");
-            return urls["Affiliation"];
-        }
     }
 }

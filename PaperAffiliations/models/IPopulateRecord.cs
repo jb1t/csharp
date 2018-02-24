@@ -6,6 +6,5 @@ namespace PaperAffiliations
     public interface IPopulateRecord<T>
     {
         T PopulateRecord(string line);
-        string GetUrl(IConfiguration config);
     }
 }

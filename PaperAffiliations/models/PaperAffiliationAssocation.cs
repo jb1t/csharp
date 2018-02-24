@@ -26,10 +26,6 @@ namespace PaperAffiliations
         {
             return $"PaperId: {this.PaperId}, AffiliationId: {this.AffiliationId}, AuthorId: {this.AuthorId}";
         }
-        public string GetUrl(IConfiguration config)
-        {   
-            var urls = config.GetSection("Urls");
-            return urls["PAAssociation"];
-        }
+
     }
 }
