@@ -1,4 +1,4 @@
-#Paper Affilition
+# Paper Affilition
 
 This is a sample homework assignment a friend of mine received. She was supposed to do it in Python, which I did make a python version of trying to use a Linq library that I found and which took me a while to get working. However, even after I got it working the performance was not good. 
 
